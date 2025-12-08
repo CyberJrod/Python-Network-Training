@@ -1,0 +1,10 @@
+{
+  "commands": {
+    "show_interface_brief": "show ip interface brief",
+    "show_route": "show ip route",
+    "show_version": "show version",
+    "show_eigrp_interfaces": "show ip eigrp interfaces",
+    "show_eigrp_neighbors": "show ip eigrp neighbors",
+    "show_eigrp_topology": "show ip eigrp topology"
+  }
+}

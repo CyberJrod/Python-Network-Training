@@ -66,6 +66,38 @@ CONFIG_PATH = ROOT / "config" / "config.json"
 config = load_config(CONFIG_PATH)
 
 
+def load_device_names_from_csv(csv_path: Path) -> List[str]:
+    names: List[str] = []
+    if not csv_path.exists():
+        return names
+    try:
+        import csv  # local import to avoid unused global if not used
+
+        with csv_path.open(newline="", encoding="utf-8-sig") as f:
+            reader = csv.DictReader(f)
+            if reader.fieldnames:
+                for row in reader:
+                    hostname = (row.get("hostname") or "").strip()
+                    ip = (row.get("ip") or row.get("device_ips") or "").strip()
+                    label = hostname or ip
+                    if label:
+                        names.append(label)
+            if not names:
+                f.seek(0)
+                reader2 = csv.reader(f)
+                for idx, row in enumerate(reader2):
+                    if not row:
+                        continue
+                    val = row[0].strip()
+                    if idx == 0 and val.lower() in ("hostname", "device_ips", "ip"):
+                        continue
+                    if val:
+                        names.append(val)
+    except Exception:
+        pass
+    return names
+
+
 def resolve_script_path(file_field: str) -> Optional[Path]:
     p = Path(file_field)
     if not p.is_absolute():
@@ -102,6 +134,14 @@ def build_cli_args_from_inputs(inputs: List[Dict[str, Any]], values: Dict[str, A
                     args.append(str(arg_name))
                 else:
                     args.append(f"--{name}")
+            continue
+        if typ == "multiselect_devices":
+            if not val:
+                continue
+            if arg_name:
+                args.append(str(arg_name))
+            # already comma-separated string
+            args.append(str(val))
             continue
         # if arg name provided, pass as flag + value, otherwise pass value alone
         if arg_name:
@@ -181,6 +221,25 @@ if scripts_catalog:
                     elif typ == "select":
                         choices = inp.get("choices", [])
                         values[key] = st.selectbox(label, choices, index=0 if default is None else (choices.index(default) if default in choices else 0))
+                    elif typ == "multiselect":
+                        choices = inp.get("choices", [])
+                        default_list = default if isinstance(default, list) else (choices if default is True else [])
+                        values[key] = st.multiselect(label, choices, default=default_list)
+                    elif typ == "multiselect_devices":
+                        csv_input = inp.get("csv_input") or "devices_csv"
+                        csv_path_str = values.get(csv_input) or default or ""
+                        csv_path = Path(csv_path_str) if csv_path_str else None
+                        device_choices: List[str] = []
+                        if csv_path:
+                            device_choices = load_device_names_from_csv(csv_path)
+                        if inp.get("include_all_option", True):
+                            device_choices = ["all"] + device_choices
+                        if inp.get("include_none_option", True):
+                            device_choices = device_choices + ["none"]
+                        default_list = default if isinstance(default, list) else (["all"] if default is True else [])
+                        selection = st.multiselect(label, device_choices, default=default_list)
+                        # store as comma-separated string for CLI arg
+                        values[key] = ",".join(selection)
                     elif typ == "bool":
                         values[key] = st.checkbox(label, value=bool(default))
                     else:

@@ -1,6 +1,6 @@
 # Python Network Automation Lab Runner (Streamlit)
 
-This Streamlit app helps run and preview your Python network automation training labs. Drop each lab script into `jobs/` (or configure them in `config/config.json`), then use the UI to read the source, pass arguments, and execute the script from the browser.
+This Streamlit app helps run and preview your Python network automation training labs. Drop each lab script into `jobs/` (or configure them in `config/config.json`), then use the UI to read the source (optional), pass arguments, and execute the script from the browser.
 
 ## Setup (Windows)
 1) Create the virtual environment with the helper script:
@@ -23,15 +23,20 @@ python -m pip install -r requirements.txt
 
 ## Running the app
 ```powershell
-python - m streamlit run app.py
+streamlit run app.py
 ```
 
-## How it works
-- Scans `config/config.json` for scripts (falls back to any `.py` files under `jobs/` / `Jobs/`).
-- Shows docstring/first comment as the description and displays the source code.
-- Runs the selected script with inputs converted to CLI args and shows return code, stdout, and stderr.
+## Current labs
+- **Lab 1 - Variables and Print**: Demonstrates variables and print statements. Prompts for device username/password via the UI.
+- **Lab 2 - Netmiko Connection**: Connects to devices from a CSV (default `data/lab2.csv`) and runs selected show commands. Prompts for username/password and lets you choose which commands to run (show ip interface brief, show ip route, show version). You can override the CSV path in the UI.
 
-## Tips
-- Keep each lab in its own `.py` file under `jobs/` or point to it via `config/config.json`.
+## Configuration
+- Scripts and their inputs are defined in `config/config.json`. The app prefers this config; if it cannot load it, it falls back to auto-discovering `.py` files under `jobs/` / `Jobs/` (no inputs in that mode).
+- Typical input types used:
+  - `text` for credentials and paths (e.g., username, password, CSV path)
+  - `bool` for toggling commands (checkboxes in the UI)
+
+## Notes
 - The app uses the same Python interpreter that launched Streamlit (ideally your venv).
+- You can optionally toggle source display per script in the UI.
 - Review scripts before running them, especially if they connect to network gear.

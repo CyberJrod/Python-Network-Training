@@ -1,0 +1,7 @@
+{
+  "r51_config": [
+    "router eigrp 100",
+    "network 10.0.0.0 0.0.0.255"
+  ],
+  "r52_config_file": "data/lab3-r52_eigrp.cfg"
+}
