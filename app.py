@@ -135,6 +135,15 @@ def build_cli_args_from_inputs(inputs: List[Dict[str, Any]], values: Dict[str, A
                 else:
                     args.append(f"--{name}")
             continue
+        if typ == "password":
+            # strip to avoid trailing spaces while keeping actual value
+            cleaned = str(val).strip()
+            if arg_name:
+                args.append(str(arg_name))
+                args.append(cleaned)
+            else:
+                args.append(cleaned)
+            continue
         if typ == "multiselect_devices":
             if not val:
                 continue
@@ -221,6 +230,8 @@ if scripts_catalog:
                     elif typ == "select":
                         choices = inp.get("choices", [])
                         values[key] = st.selectbox(label, choices, index=0 if default is None else (choices.index(default) if default in choices else 0))
+                    elif typ == "password":
+                        values[key] = st.text_input(label, value=str(default) if default is not None else "", type="password")
                     elif typ == "multiselect":
                         choices = inp.get("choices", [])
                         default_list = default if isinstance(default, list) else (choices if default is True else [])

@@ -8,7 +8,7 @@
             "description": "Example lab: variables and print statement",
             "inputs": [
                 {"name": "username", "label": "Device username", "arg": "--username", "type": "text"},
-                {"name": "password", "label": "Device password", "arg": "--password", "type": "text"}
+                {"name": "password", "label": "Device password", "arg": "--password", "type": "password"}
             ]
         },
         {
@@ -18,7 +18,7 @@
             "description": "Connects to devices from CSV and runs selected show commands",
             "inputs": [
                 {"name": "username", "label": "Device username", "arg": "--username", "type": "text"},
-                {"name": "password", "label": "Device password", "arg": "--password", "type": "text"},
+                {"name": "password", "label": "Device password", "arg": "--password", "type": "password"},
                 {"name": "csv_path", "label": "Device CSV path", "arg": "--csv-path", "type": "text", "default": "data/lab2-devices.csv"},
                 {"name": "commands_json", "label": "Commands JSON path", "arg": "--commands-json", "type": "text", "default": "data/show-commands.json"},
                 {"name": "show_interface_brief", "label": "Run 'show ip interface brief'", "arg": "--show-interface-brief", "type": "bool", "default": true},
@@ -36,7 +36,7 @@
             "description": "Pushes EIGRP config to two routers (inline for R51, file for R52)",
             "inputs": [
                 {"name": "username", "label": "Device username", "arg": "--username", "type": "text"},
-                {"name": "password", "label": "Device password", "arg": "--password", "type": "text"},
+                {"name": "password", "label": "Device password", "arg": "--password", "type": "password"},
                 {"name": "devices_csv", "label": "Devices CSV path", "arg": "--devices-csv", "type": "text", "default": "data/lab3-devices.csv"},
                 {"name": "commands_json", "label": "Commands JSON path", "arg": "--commands-json", "type": "text", "default": "data/show-commands.json"},
                 {"name": "lab3_config_json", "label": "Lab3 config JSON", "arg": "--lab3-config-json", "type": "text", "default": "data/lab3-config.json"},
