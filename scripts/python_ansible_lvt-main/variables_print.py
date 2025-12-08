@@ -72,3 +72,5 @@ print ("AS is:", eigrp_as, "and type is:", type(eigrp_as))
 print (f"The IP address of {hostname1} is {device_ips[0]}")
 print (f"The IP address of {devices_dict['device1']['hostname']} is {devices_dict['device1']['ip']}")
 print (f"The IP address of {devices_list[1]['hostname']} is {devices_list[1]['ip']}")
+
+

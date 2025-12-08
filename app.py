@@ -186,16 +186,17 @@ if scripts_catalog:
                     else:
                         values[key] = st.text_input(label, value=str(default) if default is not None else "")
 
-            extra_args = st.text_input("Extra command-line args (space-separated)", value="")
             run_btn = st.button("Run script")
 
         with col2:
-            st.subheader("Source")
-            try:
-                code = script_path.read_text(encoding="utf-8")
-                st.code(code, language="python")
-            except Exception as e:
-                st.error(f"Could not read file: {e}")
+            show_source = st.checkbox("Show source code", value=False)
+            if show_source:
+                st.subheader("Source")
+                try:
+                    code = script_path.read_text(encoding="utf-8")
+                    st.code(code, language="python")
+                except Exception as e:
+                    st.error(f"Could not read file: {e}")
 
         if run_btn:
             cmd = [sys.executable, str(script_path)]
@@ -203,8 +204,6 @@ if scripts_catalog:
             args_from_inputs = build_cli_args_from_inputs(inputs, values)
             if args_from_inputs:
                 cmd += args_from_inputs
-            if extra_args:
-                cmd += extra_args.split()
 
             st.subheader("Execution")
             st.write("Running:", " ".join(cmd))
