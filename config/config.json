@@ -1,0 +1,12 @@
+{
+    "#schema": "1.0",
+    "scripts": [
+        {
+            "id": "lab1",
+            "name": "Lab 1 - Variables and Print",
+            "file": "Jobs/Lab-1-Variables-and-Print.py",
+            "description": "Example lab: variables and print statement",
+            "inputs": []
+        }
+    ]
+}
