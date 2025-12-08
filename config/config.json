@@ -6,7 +6,24 @@
             "name": "Lab 1 - Variables and Print",
             "file": "Jobs/Lab-1-Variables-and-Print.py",
             "description": "Example lab: variables and print statement",
-            "inputs": []
+            "inputs": [
+                {"name": "username", "label": "Device username", "arg": "--username", "type": "text"},
+                {"name": "password", "label": "Device password", "arg": "--password", "type": "text"}
+            ]
+        },
+        {
+            "id": "lab2",
+            "name": "Lab 2 - Netmiko Connection",
+            "file": "Jobs/Lab-2-Netmiko-Connection.py",
+            "description": "Connects to two routers and runs show ip interface brief and show ip route commands",
+            "inputs": [
+                {"name": "username", "label": "Device username", "arg": "--username", "type": "text"},
+                {"name": "password", "label": "Device password", "arg": "--password", "type": "text"},
+                {"name": "csv_path", "label": "Device CSV path", "arg": "--csv-path", "type": "text", "default": "data/lab2.csv"},
+                {"name": "show_interface_brief", "label": "Run 'show ip interface brief'", "arg": "--show-interface-brief", "type": "bool", "default": true},
+                {"name": "show_route", "label": "Run 'show ip route'", "arg": "--show-route", "type": "bool", "default": true},
+                {"name": "show_version", "label": "Run 'show version'", "arg": "--show-version", "type": "bool", "default": true}
+            ]
         }
     ]
 }
