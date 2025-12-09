@@ -30,6 +30,8 @@ streamlit run app.py
 - **Lab 1 - Variables and Print**: Demonstrates variables and print statements. Prompts for device username/password via the UI.
 - **Lab 2 - Netmiko Connection**: Connects to devices from a CSV (default `data/lab2-devices.csv`) and runs selected show commands defined in `data/show-commands.json` (show ip interface brief, show ip route, show version, show ip eigrp interfaces/neighbors/topology). Username/password and command toggles are set in the UI; you can override CSV/commands JSON paths.
 - **Lab 3 - Basic Netmiko Config Changes**: Loads devices from CSV (`data/lab3-devices.csv`), show commands from `data/show-commands.json`, and config info from `data/lab3-config.json` (R51 inline list, R52 config file `data/lab3-r52_eigrp.cfg`). UI lets you choose whether to push config, select target devices (all/none/per-device), and toggle which show commands to run. Credentials and file paths are UI inputs.
+- **Lab 4 - Single Loop**: Runs selected show commands on devices from `data/lab4-devices.csv` using a single for loop with a `with` statement. Commands come from `data/show-commands.json`; toggle which to run in the UI.
+- **Lab 5 - Nested For Loops**: Runs selected show commands on devices from `data/lab5-devices.csv` using nested loops and a `with` statement. Commands come from `data/show-commands.json`; toggle which to run in the UI.
 
 ## Configuration
 - Scripts and their inputs are defined in `config/config.json`. The app prefers this config; if it cannot load it, it falls back to auto-discovering `.py` files under `jobs/` / `Jobs/` (no inputs in that mode).
