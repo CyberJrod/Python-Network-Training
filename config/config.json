@@ -51,5 +51,24 @@
                 {"name": "show_eigrp_topology", "label": "Run 'show ip eigrp topology'", "arg": "--show-eigrp-topology", "type": "bool", "default": true}
             ]
         }
+        ,
+        {
+            "id": "lab4",
+            "name": "Lab 4 - Single Loop",
+            "file": "Jobs/Lab-4-Single-Loop.py",
+            "description": "Uses a single for loop to run selected show commands on devices from CSV",
+            "inputs": [
+                {"name": "username", "label": "Device username", "arg": "--username", "type": "text"},
+                {"name": "password", "label": "Device password", "arg": "--password", "type": "password"},
+                {"name": "csv_path", "label": "Device CSV path", "arg": "--csv-path", "type": "text", "default": "data/lab4-devices.csv"},
+                {"name": "commands_json", "label": "Commands JSON path", "arg": "--commands-json", "type": "text", "default": "data/show-commands.json"},
+                {"name": "show_interface_brief", "label": "Run 'show ip interface brief'", "arg": "--show-interface-brief", "type": "bool", "default": true},
+                {"name": "show_route", "label": "Run 'show ip route'", "arg": "--show-route", "type": "bool", "default": true},
+                {"name": "show_version", "label": "Run 'show version'", "arg": "--show-version", "type": "bool", "default": true},
+                {"name": "show_eigrp_interfaces", "label": "Run 'show ip eigrp interfaces'", "arg": "--show-eigrp-interfaces", "type": "bool", "default": true},
+                {"name": "show_eigrp_neighbors", "label": "Run 'show ip eigrp neighbors'", "arg": "--show-eigrp-neighbors", "type": "bool", "default": true},
+                {"name": "show_eigrp_topology", "label": "Run 'show ip eigrp topology'", "arg": "--show-eigrp-topology", "type": "bool", "default": true}
+            ]
+        }
     ]
 }
