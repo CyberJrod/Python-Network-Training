@@ -23,7 +23,6 @@ device_ips = ["10.0.0.51", "10.0.0.52"]
 commands = ["show ip interface brief", "show ip route"]
 
 
-
 # ----------------------------------------------
 # Import Modules
 # ----------------------------------------------
@@ -59,5 +58,16 @@ devices = [
 # Connect to Routers using For Loop and 'with' statement
 # ------------------------------------------------------
 
+for device in devices:
 
+    print(f"\n===== Connecting to {device['hostname']} ({device['ip']}) =====")
 
+    with ConnectHandler(**device["info"]) as net_connect:
+
+        # First command
+        output = net_connect.send_command(command1)
+        print(f"\n{device['hostname']} - {command1}\n{output}\n")
+
+        # Second command
+        output = net_connect.send_command(command2)
+        print(f"\n{device['hostname']} - {command2}\n{output}\n")

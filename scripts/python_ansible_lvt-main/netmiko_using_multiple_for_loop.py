@@ -1,5 +1,5 @@
 #----------------------------------------------
-# Variable
+# Variables
 #----------------------------------------------
 
 hostname1 = "C8K-R51"
@@ -60,5 +60,11 @@ devices = [
 # Connect to Routers using Nested For Loops and 'with' statement
 # --------------------------------------------------------------
 
+for device in devices:
+    print(f"\n===== Connecting to {device['hostname']} ({device['ip']}) =====")
 
+    with ConnectHandler(**device["info"]) as net_connect:
 
+        for cmd in commands:
+            output = net_connect.send_command(cmd)
+            print(f"\n{device['hostname']} - {cmd}\n{output}\n")

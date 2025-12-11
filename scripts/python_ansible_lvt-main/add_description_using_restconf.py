@@ -1,14 +1,8 @@
-# ======================================================================
-# Import Modules
-# ======================================================================
-
 import requests
 import json
 import urllib3
 
-# ======================================================================
-# Variables
-# ======================================================================
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 devices = [
     {
@@ -42,21 +36,23 @@ payload = {
     }
 }
 
-# ======================================================================
-# Build your For Loop
-# ======================================================================
-
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-
 for device in devices:
     url = (
-
+        f"https://{device['host']}:{device['port']}"
+        f"/restconf/data/ietf-interfaces:interfaces/interface={interface_name}"
     )
 
     print(f"\nPushing description to {interface_name} on {device['host']} ...")
 
     try:
-        
+        response = requests.patch(
+            url,
+            headers=headers,
+            auth=(device["username"], device["password"]),
+            data=json.dumps(payload),
+            verify=False,
+            timeout=5,   # <-- explicit timeout in seconds
+        )
     except requests.exceptions.ConnectTimeout:
         print(f"❌ Could not reach {device['host']} on port {device['port']} (connect timeout)")
         continue

@@ -56,12 +56,9 @@ devices_list = [
         }
 ]
 
-
-
 #----------------------------------------------
 # Print Statements
 #----------------------------------------------
-
 print ("The hostname of the router is", hostname1)
 print (f"The hostname of the router is {hostname2}")
 print ("The hostname of the router is", hostname1, "and the IP is", c8k51_ip)
@@ -72,5 +69,3 @@ print ("AS is:", eigrp_as, "and type is:", type(eigrp_as))
 print (f"The IP address of {hostname1} is {device_ips[0]}")
 print (f"The IP address of {devices_dict['device1']['hostname']} is {devices_dict['device1']['ip']}")
 print (f"The IP address of {devices_list[1]['hostname']} is {devices_list[1]['ip']}")
-
-
